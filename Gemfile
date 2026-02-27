@@ -18,6 +18,7 @@ gem 'dotenv', require: false
 gem 'email_typo'
 gem 'faraday'
 gem 'faraday-follow_redirects'
+gem 'mailgun-ruby', '~> 1.2'
 gem 'google-cloud-storage', require: false
 gem 'hexapdf'
 gem 'image_processing'

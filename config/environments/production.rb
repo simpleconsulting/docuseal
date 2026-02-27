@@ -77,7 +77,15 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = false
 
-  if ENV['SMTP_ADDRESS']
+  if ENV['MAILGUN_API_KEY'] && ENV['MAILGUN_DOMAIN']
+    require 'mailgun-ruby'
+
+    config.action_mailer.delivery_method = :mailgun
+    config.action_mailer.mailgun_settings = {
+      api_key: ENV['MAILGUN_API_KEY'],
+      domain: ENV['MAILGUN_DOMAIN']
+    }
+  elsif ENV['SMTP_ADDRESS']
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       address: ENV.fetch('SMTP_ADDRESS', nil),
